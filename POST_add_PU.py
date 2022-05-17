@@ -6,7 +6,6 @@ from GET_aut import authentication_token
 
 
 
-
 ip = '10.10.29.110'
 n=1
 name_file = authentication_token()
