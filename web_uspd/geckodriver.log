@@ -1,0 +1,44 @@
+1659968188966	geckodriver	INFO	Listening on 127.0.0.1:57676
+1659968192022	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "57677" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileJXvZvN"
+*** You are running in headless mode.
+1659968192272	Marionette	INFO	Marionette enabled
+1659968192275	Marionette	INFO	Listening on port 57688
+WebDriver BiDi listening on ws://localhost:57677
+Read port: 57688
+1659968192469	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileJXvZvN\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:57677/devtools/browser/9fb77f22-78de-4cc3-a65c-0b58269fcef1
+JavaScript error: http://10.10.29.110/static/js/2.54b26188.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1659968280529	geckodriver	INFO	Listening on 127.0.0.1:57804
+1659968283581	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "57805" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofile0tmOpP"
+*** You are running in headless mode.
+1659968283824	Marionette	INFO	Marionette enabled
+1659968283828	Marionette	INFO	Listening on port 57818
+WebDriver BiDi listening on ws://localhost:57805
+Read port: 57818
+1659968284012	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofile0tmOpP\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:57805/devtools/browser/fdfaf565-0a97-4eee-a53c-d82bc55b1380
+JavaScript error: http://10.10.29.110/static/js/2.54b26188.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null

@@ -1,5 +1,3 @@
-from email import message
-from urllib import response
 import requests
 import pytest
 from settings import url_form_in_ip
