@@ -1,0 +1,8 @@
+
+import requests
+import binascii
+
+response = requests.get( 'http://10.10.29.110/main', timeout=10)
+
+print(response.status_code)
+print(response.headers)
