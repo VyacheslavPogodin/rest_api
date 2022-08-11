@@ -1,17 +1,17 @@
 
 from time import sleep
 from selenium import webdriver
-#from selenium.webdriver.firefox.webdriver import WebDriver
+
 
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.firefox.service import Service
-#from selenium.webdriver.firefox.options import Options
+
 from selenium.common.exceptions import NoSuchElementException
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-#from selenium.webdriver.support.ui import Select
+
 
 # Класс WebDriver добавлена функция пом=иска элемента с обработкой исключения NoSuchElementException и передачей в assert Pytest
 class FindElementWithExcept(webdriver.Firefox):
