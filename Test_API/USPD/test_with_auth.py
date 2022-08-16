@@ -13,7 +13,7 @@ def test_get_authentication_201():
         assert response.status_code == 201,                                                                                             f"С адреса {response.url} получен ответ на запрос сервера не соответствующий требуемому"
         assert response.headers['Content-Type'] == 'application/json; charset=utf-8',                                                   f"В заголовке ответа Content-Type с адреса {response.url} выставлен не ожидаемый тип передаваемого контента"
         assert int(response.headers['Content-Length']) == len(response.content),                                                        f"Объем передаваемого контената с адреса {response.url} не соответствует указанному в заголовке Content-Length"
-        assert list(response.json().keys())  == ['accessToken', 'authentication', 'role'],                                              f"С адреса {response.url} в ответе список требуемых параметров не соответствует требуемому"             
+        assert list(response.json().keys())  == ['accessToken', 'authentication', 'user'],                                              f"С адреса {response.url} в ответе список требуемых параметров не соответствует требуемому"             
         assert response.json()['role'] == {"id":1, 'login':"user_admin",  "role_name":"user"},                                          f"С адреса {response.url} при аутентификации пользователя присвоена не соответствующая роль"
 
 

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Test Report</title>
+    <link href="assets/style.css" rel="stylesheet" type="text/css"/></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) { // eslint-disable-line no-redeclare
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function findAll(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sortColumn(elem) {
+    toggleSortStates(elem);
+    const colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    let key;
+    if (elem.classList.contains('result')) {
+        key = keyResult;
+    } else if (elem.classList.contains('links')) {
+        key = keyLink;
+    } else {
+        key = keyAlpha;
+    }
+    sortTable(elem, key(colIndex));
+}
+
+function showAllExtras() { // eslint-disable-line no-unused-vars
+    findAll('.col-result').forEach(showExtras);
+}
+
+function hideAllExtras() { // eslint-disable-line no-unused-vars
+    findAll('.col-result').forEach(hideExtras);
+}
+
+function showExtras(colresultElem) {
+    const extras = colresultElem.parentNode.nextElementSibling;
+    const expandcollapse = colresultElem.firstElementChild;
+    extras.classList.remove('collapsed');
+    expandcollapse.classList.remove('expander');
+    expandcollapse.classList.add('collapser');
+}
+
+function hideExtras(colresultElem) {
+    const extras = colresultElem.parentNode.nextElementSibling;
+    const expandcollapse = colresultElem.firstElementChild;
+    extras.classList.add('collapsed');
+    expandcollapse.classList.remove('collapser');
+    expandcollapse.classList.add('expander');
+}
+
+function showFilters() {
+    const filterItems = document.getElementsByClassName('filter');
+    for (let i = 0; i < filterItems.length; i++)
+        filterItems[i].hidden = false;
+}
+
+function addCollapse() {
+    // Add links for show/hide all
+    const resulttable = find('table#results-table');
+    const showhideall = document.createElement('p');
+    showhideall.innerHTML = '<a href="javascript:showAllExtras()">Show all details</a> / ' +
+                            '<a href="javascript:hideAllExtras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    findAll('.col-result').forEach(function(elem) {
+        const collapsed = getQueryParameter('collapsed') || 'Passed';
+        const extras = elem.parentNode.nextElementSibling;
+        const expandcollapse = document.createElement('span');
+        if (extras.classList.contains('collapsed')) {
+            expandcollapse.classList.add('expander');
+        } else if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add('collapsed');
+            expandcollapse.classList.add('expander');
+        } else {
+            expandcollapse.classList.add('collapser');
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener('click', function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains('collapsed')) {
+                showExtras(event.currentTarget);
+            } else {
+                hideExtras(event.currentTarget);
+            }
+        });
+    });
+}
+
+function getQueryParameter(name) {
+    const match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () { // eslint-disable-line no-unused-vars
+    resetSortHeaders();
+
+    addCollapse();
+
+    showFilters();
+
+    sortColumn(find('.initial-sort'));
+
+    findAll('.sortable').forEach(function(elem) {
+        elem.addEventListener('click',
+            function() {
+                sortColumn(elem);
+            }, false);
+    });
+}
+
+function sortTable(clicked, keyFunc) {
+    const rows = findAll('.results-table-row');
+    const reversed = !clicked.classList.contains('asc');
+    const sortedRows = sort(rows, keyFunc, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    const thead = document.getElementById('results-table-head');
+    document.getElementById('results-table').remove();
+    const parent = document.createElement('table');
+    parent.id = 'results-table';
+    parent.appendChild(thead);
+    sortedRows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName('BODY')[0].appendChild(parent);
+}
+
+function sort(items, keyFunc, reversed) {
+    const sortArray = items.map(function(item, i) {
+        return [keyFunc(item), i];
+    });
+
+    sortArray.sort(function(a, b) {
+        const keyA = a[0];
+        const keyB = b[0];
+
+        if (keyA == keyB) return 0;
+
+        if (reversed) {
+            return keyA < keyB ? 1 : -1;
+        } else {
+            return keyA > keyB ? 1 : -1;
+        }
+    });
+
+    return sortArray.map(function(item) {
+        const index = item[1];
+        return items[index];
+    });
+}
+
+function keyAlpha(colIndex) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[colIndex].firstChild.data.toLowerCase();
+    };
+}
+
+function keyLink(colIndex) {
+    return function(elem) {
+        const dataCell = elem.childNodes[1].childNodes[colIndex].firstChild;
+        return dataCell == null ? '' : dataCell.innerText.toLowerCase();
+    };
+}
+
+function keyResult(colIndex) {
+    return function(elem) {
+        const strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+            'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[colIndex].firstChild.data);
+    };
+}
+
+function resetSortHeaders() {
+    findAll('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    findAll('.sortable').forEach(function(elem) {
+        const icon = document.createElement('div');
+        icon.className = 'sort-icon';
+        icon.textContent = 'vvv';
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove('desc', 'active');
+        elem.classList.add('asc', 'inactive');
+    });
+}
+
+function toggleSortStates(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        resetSortHeaders();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function isAllRowsHidden(value) {
+    return value.hidden == false;
+}
+
+function filterTable(elem) { // eslint-disable-line no-unused-vars
+    const outcomeAtt = 'data-test-result';
+    const outcome = elem.getAttribute(outcomeAtt);
+    const classOutcome = outcome + ' results-table-row';
+    const outcomeRows = document.getElementsByClassName(classOutcome);
+
+    for(let i = 0; i < outcomeRows.length; i++){
+        outcomeRows[i].hidden = !elem.checked;
+    }
+
+    const rows = findAll('.results-table-row').filter(isAllRowsHidden);
+    const allRowsHidden = rows.length == 0 ? true : false;
+    const notFoundMessage = document.getElementById('not-found-message');
+    notFoundMessage.hidden = !allRowsHidden;
+}
+</script>
+    <h1>2022-08-11 17-57-46.html</h1>
+    <p>Report generated on 11-Aug-2022 at 17:57:56 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <h2>Environment</h2>
+    <table id="environment">
+      <tr>
+        <td>JAVA_HOME</td>
+        <td>C:\Program Files\Java\jdk1.7.0_80</td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{"pluggy": "0.13.1", "py": "1.11.0", "pytest": "7.1.2"}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.19043-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{"allure-pytest": "2.8.19", "devpi-server": "6.4.0", "html": "3.1.1", "metadata": "2.0.1"}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.10.2</td></tr></table>
+    <h2>Summary</h2>
+    <p>25 tests ran in 9.97 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">17 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">8 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <h2>Results</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">Result</th>
+          <th class="sortable" col="name">Test</th>
+          <th class="sortable" col="duration">Duration</th>
+          <th class="sortable links" col="links">Links</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_with_auth.py::test_get_authentication_201</td>
+          <td class="col-duration">1.33</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_authentication_201():<br/>            key = &quot;auth&quot;<br/>            payload =  {&quot;strategy&quot;: &quot;local&quot;, &quot;login&quot;: &quot;user_admin&quot;, &quot;password&quot;: &quot;admin123&quot;}<br/>            response = requests.post(url_form_in_ip(key), data=payload)<br/>    <br/>            assert response.status_code == 201,                                                                                             f&quot;С адреса {response.url} получен ответ на запрос сервера не соответствующий требуемому&quot;<br/>            assert response.headers[&#x27;Content-Type&#x27;] == &#x27;application/json; charset=utf-8&#x27;,                                                   f&quot;В заголовке ответа Content-Type с адреса {response.url} выставлен не ожидаемый тип передаваемого контента&quot;<br/>            assert int(response.headers[&#x27;Content-Length&#x27;]) == len(response.content),                                                        f&quot;Объем передаваемого контената с адреса {response.url} не соответствует указанному в заголовке Content-Length&quot;<br/>&gt;           assert list(response.json().keys())  == [&#x27;accessToken&#x27;, &#x27;authentication&#x27;, &#x27;role&#x27;],                                              f&quot;С адреса {response.url} в ответе список требуемых параметров не соответствует требуемому&quot;<br/><span class="error">E           AssertionError: С адреса http://10.10.29.110/api/v1/authentication в ответе список требуемых параметров не соответствует требуемому</span><br/><span class="error">E           assert [&#x27;accessToken...tion&#x27;, &#x27;user&#x27;] == [&#x27;accessToken...tion&#x27;, &#x27;role&#x27;]</span><br/><span class="error">E             At index 2 diff: &#x27;user&#x27; != &#x27;role&#x27;</span><br/><span class="error">E             Full diff:</span><br/><span class="error">E             - [&#x27;accessToken&#x27;, &#x27;authentication&#x27;, &#x27;role&#x27;]</span><br/><span class="error">E             ?                                     ---</span><br/><span class="error">E             + [&#x27;accessToken&#x27;, &#x27;authentication&#x27;, &#x27;user&#x27;]</span><br/><span class="error">E             ?                                    +++</span><br/><br/>test_with_auth.py:16: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_with_auth.py::TestClassCheckPageGet::test_get_confmode_info_configure_with_auth</td>
+          <td class="col-duration">1.37</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;test_with_auth.TestClassCheckPageGet object at 0x0000027828FE4610&gt;<br/>form_head_for_get_auth = {&#x27;Authorization&#x27;: &#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2NjAyMjk4NjksImV4cCI6MTY2MDMxNjI2OSwiYXVkIjoibG...JzdWIiOiIxIiwianRpIjoiZDVkNjllOGYtN2E3MS00ZjM0LWExMTgtMDFlYjIxZDIwMzFjIn0.aaEeIGTC-rhfeNUkPwHZYGb_Gp1pFAUE-1pfAd1mPh8&#x27;}<br/><br/>    def test_get_confmode_info_configure_with_auth(self, form_head_for_get_auth):<br/>        key = &quot;configyre&quot;<br/>        response = requests.get(url_form_in_ip(key), headers=form_head_for_get_auth, timeout=10)<br/>    <br/>        assert response.status_code == 200,                                                                                             f&quot;С адреса {response.url} получен ответ на запрос сервера не соответствующий требуемому&quot;<br/>        assert response.headers[&#x27;Content-Type&#x27;] == &#x27;application/json; charset=utf-8&#x27;,                                                   f&quot;В заголовке ответа Content-Type с адреса {response.url} выставлен не ожидаемый тип передаваемого контента&quot;<br/>        assert int(response.headers[&#x27;Content-Length&#x27;]) == len(response.content),                                                        f&quot;Объем передаваемого контената с адреса {response.url} не соответствует указанному в заголовке Content-Length&quot;<br/>&gt;       assert list(response.json().keys())  == [&#x27;data&#x27;,&#x27;statuses&#x27;]<br/><span class="error">E       AssertionError: assert [&#x27;data&#x27;, &#x27;mod_id&#x27;, &#x27;statuses&#x27;] == [&#x27;data&#x27;, &#x27;statuses&#x27;]</span><br/><span class="error">E         At index 1 diff: &#x27;mod_id&#x27; != &#x27;statuses&#x27;</span><br/><span class="error">E         Left contains one more item: &#x27;statuses&#x27;</span><br/><span class="error">E         Full diff:</span><br/><span class="error">E         - [&#x27;data&#x27;, &#x27;statuses&#x27;]</span><br/><span class="error">E         + [&#x27;data&#x27;, &#x27;mod_id&#x27;, &#x27;statuses&#x27;]</span><br/><span class="error">E         ?         ++++++++++</span><br/><br/>test_with_auth.py:32: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_with_auth.py::TestClassGSMConfig::test_get_gsm_2_with_auth</td>
+          <td class="col-duration">0.08</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;test_with_auth.TestClassGSMConfig object at 0x0000027828FE5270&gt;<br/>form_head_for_get_auth = {&#x27;Authorization&#x27;: &#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2NjAyMjk4NjksImV4cCI6MTY2MDMxNjI2OSwiYXVkIjoibG...JzdWIiOiIxIiwianRpIjoiZDVkNjllOGYtN2E3MS00ZjM0LWExMTgtMDFlYjIxZDIwMzFjIn0.aaEeIGTC-rhfeNUkPwHZYGb_Gp1pFAUE-1pfAd1mPh8&#x27;}<br/><br/>    def test_get_gsm_2_with_auth(self, form_head_for_get_auth):<br/>        key = &#x27;gsm_2&#x27;<br/>        response = requests.get(url_form_in_ip(key), headers=form_head_for_get_auth, timeout=10)<br/>        if response.json() == {}:<br/>            pytest.skip(&quot;В УСПД не настроены параметры GSM №2, перед началом тестирования необходимо настроить УСПД&quot;)<br/>        assert response.status_code == 200,                                                                                             f&quot;С адреса {response.url} получен ответ на запрос сервера не соответствующий требуемому&quot;<br/>        assert response.headers[&#x27;Content-Type&#x27;] == &#x27;application/json; charset=utf-8&#x27;,                                                   f&quot;В заголовке ответа Content-Type с адреса {response.url} выставлен не ожидаемый тип передаваемого контента&quot;<br/>        assert int(response.headers[&#x27;Content-Length&#x27;]) == len(response.content),                                                        f&quot;Объем передаваемого контената с адреса {response.url} не соответствует указанному в заголовке Content-Length&quot;<br/>&gt;       assert list(response.json().keys()) == [&#x27;id&#x27;, &#x27;sim_num&#x27;, &#x27;apn&#x27;, &#x27;username&#x27;, &#x27;password&#x27;, &#x27;connection_priority&#x27;]<br/><span class="error">E       AssertionError: assert [&#x27;connection_priority&#x27;] == [&#x27;id&#x27;, &#x27;sim_n...ion_priority&#x27;]</span><br/><span class="error">E         At index 0 diff: &#x27;connection_priority&#x27; != &#x27;id&#x27;</span><br/><span class="error">E         Right contains 5 more items, first extra item: &#x27;sim_num&#x27;</span><br/><span class="error">E         Full diff:</span><br/><span class="error">E         - [&#x27;id&#x27;, &#x27;sim_num&#x27;, &#x27;apn&#x27;, &#x27;username&#x27;, &#x27;password&#x27;, &#x27;connection_priority&#x27;]</span><br/><span class="error">E         + [&#x27;connection_priority&#x27;]</span><br/><br/>test_with_auth.py:316: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_with_auth.py::TestClassGSMConfig::test_put_gsm_2_with_auth</td>
+          <td class="col-duration">0.46</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;test_with_auth.TestClassGSMConfig object at 0x0000027828FE4B50&gt;<br/>form_head_for_get_auth = {&#x27;Authorization&#x27;: &#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2NjAyMjk4NjksImV4cCI6MTY2MDMxNjI2OSwiYXVkIjoibG...JzdWIiOiIxIiwianRpIjoiZDVkNjllOGYtN2E3MS00ZjM0LWExMTgtMDFlYjIxZDIwMzFjIn0.aaEeIGTC-rhfeNUkPwHZYGb_Gp1pFAUE-1pfAd1mPh8&#x27;}<br/><br/>    def test_put_gsm_2_with_auth(self, form_head_for_get_auth):<br/>        key = &#x27;gsm_2&#x27;<br/>        check_gsm = requests.get(url_form_in_ip(key), headers=form_head_for_get_auth, timeout=10).json()<br/>        conf_gsm_new={&#x27;sim_num&#x27;: &#x27;2&#x27;,<br/>                        &#x27;apn&#x27;: &#x27;Test.spb&#x27;, &#x27;username&#x27;: &#x27;test123&#x27;,<br/>                        &#x27;password&#x27;: &#x27;Test1#$&#x27;, &#x27;connection_priority&#x27;: &#x27;2&#x27;}<br/>        response = requests.put(url_form_in_ip(key), headers=form_head_for_get_auth, json=conf_gsm_new, timeout=10)<br/>        res_get = requests.get(url_form_in_ip(key), headers=form_head_for_get_auth, timeout=10)<br/>        conf_gsm_new[&#x27;id&#x27;] = 2<br/>    <br/>        assert response.status_code == 200,                                                                                             f&quot;С адреса {response.url} получен ответ на запрос сервера не соответствующий требуемому&quot;<br/>        assert response.headers[&#x27;Content-Type&#x27;] == &#x27;application/json; charset=utf-8&#x27;,                                                   f&quot;В заголовке ответа Content-Type с адреса {response.url} выставлен не ожидаемый тип передаваемого контента&quot;<br/>        assert int(response.headers[&#x27;Content-Length&#x27;]) == len(response.content),                                                        f&quot;Объем передаваемого контената с адреса {response.url} не соответствует указанному в заголовке Content-Length&quot;<br/>    <br/>&gt;       assert res_get.json() == conf_gsm_new<br/><span class="error">E       AssertionError: assert {&#x27;connection_priority&#x27;: &#x27;2&#x27;} == {&#x27;apn&#x27;: &#x27;Test...Test1#$&#x27;, ...}</span><br/><span class="error">E         Omitting 1 identical items, use -vv to show</span><br/><span class="error">E         Right contains 5 more items:</span><br/><span class="error">E         {&#x27;apn&#x27;: &#x27;Test.spb&#x27;,</span><br/><span class="error">E          &#x27;id&#x27;: 2,</span><br/><span class="error">E          &#x27;password&#x27;: &#x27;Test1#$&#x27;,</span><br/><span class="error">E          &#x27;sim_num&#x27;: &#x27;2&#x27;,</span><br/><span class="error">E          &#x27;username&#x27;: &#x27;test123&#x27;}...</span><br/><span class="error">E         </span><br/><span class="error">E         ...Full output truncated (10 lines hidden), use &#x27;-vv&#x27; to show</span><br/><br/>test_with_auth.py:335: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_with_auth.py::TestClassEthConfig::test_get_eth_2_with_auth</td>
+          <td class="col-duration">0.16</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;test_with_auth.TestClassEthConfig object at 0x0000027828FE5960&gt;<br/>form_head_for_get_auth = {&#x27;Authorization&#x27;: &#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2NjAyMjk4NjksImV4cCI6MTY2MDMxNjI2OSwiYXVkIjoibG...JzdWIiOiIxIiwianRpIjoiZDVkNjllOGYtN2E3MS00ZjM0LWExMTgtMDFlYjIxZDIwMzFjIn0.aaEeIGTC-rhfeNUkPwHZYGb_Gp1pFAUE-1pfAd1mPh8&#x27;}<br/><br/>    def test_get_eth_2_with_auth(self, form_head_for_get_auth):<br/>        url = url_form_in_ip(&#x27;eth&#x27;)+&#x27;/2&#x27;<br/>        response = requests.get(url, headers=form_head_for_get_auth, timeout=10)<br/>        if response.json() == {&#x27;name&#x27;: &#x27;NotFound&#x27;, &#x27;message&#x27;: &#x27;Page not found&#x27;,<br/>                                &#x27;code&#x27;: 404, &#x27;className&#x27;: &#x27;not-found&#x27;,<br/>                                &#x27;data&#x27;: {&#x27;url&#x27;: &#x27;/api/v1/confethernet/3&#x27;}, &#x27;errors&#x27;: {}}:<br/>            pytest.skip(&quot;интерфейс eth1 в УСПД не установлен&quot;)<br/>&gt;       assert response.status_code == 200,                                                                                             f&quot;С адреса {response.url} получен ответ на запрос сервера не соответствующий требуемому&quot;<br/><span class="error">E       AssertionError: С адреса http://10.10.29.110/api/v1/confethernet/2 получен ответ на запрос сервера не соответствующий требуемому</span><br/><span class="error">E       assert 404 == 200</span><br/><span class="error">E        +  where 404 = &lt;Response [404]&gt;.status_code</span><br/><br/>test_with_auth.py:366: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_with_auth.py::TestClassEthConfig::test_put_eth_2_with_auth</td>
+          <td class="col-duration">0.34</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;test_with_auth.TestClassEthConfig object at 0x0000027828FE5A50&gt;<br/>form_head_for_get_auth = {&#x27;Authorization&#x27;: &#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2NjAyMjk4NjksImV4cCI6MTY2MDMxNjI2OSwiYXVkIjoibG...JzdWIiOiIxIiwianRpIjoiZDVkNjllOGYtN2E3MS00ZjM0LWExMTgtMDFlYjIxZDIwMzFjIn0.aaEeIGTC-rhfeNUkPwHZYGb_Gp1pFAUE-1pfAd1mPh8&#x27;}<br/><br/>    def test_put_eth_2_with_auth(self, form_head_for_get_auth):<br/>        url = url_form_in_ip(&#x27;eth&#x27;)+&#x27;/2&#x27;<br/>        check_eth = requests.get(url, headers=form_head_for_get_auth, timeout=10).json()<br/>        conf_eth_new={&#x27;ip&#x27;: &#x27;999.999.999.999&#x27;,<br/>                        &#x27;mask&#x27;: &#x27;255.255.252.0&#x27;, &#x27;gateway&#x27;: &#x27;10.10.31.255&#x27;,<br/>                        &#x27;dns_1&#x27;: &#x27;10.10.30.1&#x27;, &#x27;dns_2&#x27;: &#x27;10.10.30.2&#x27;,<br/>                        &#x27;mac&#x27;: &#x27;d0:03:eb:ee:26:dd&#x27;, &#x27;domain&#x27;: &#x27;nartis.ru&#x27;,<br/>                        &#x27;connection&#x27;: &#x27;static&#x27;, &#x27;source&#x27;: 1}<br/>    <br/>        response = requests.put(url, headers=form_head_for_get_auth, json=conf_eth_new, timeout=10)<br/>        #response = requests.get(url, headers=form_head_for_get_auth, timeout=10)<br/>        conf_eth_new[&#x27;id&#x27;] = 2<br/>        assert response.status_code == 200,                                                                                             f&quot;С адреса {response.url} получен ответ на запрос сервера не соответствующий требуемому&quot;<br/>        assert response.headers[&#x27;Content-Type&#x27;] == &#x27;application/json; charset=utf-8&#x27;,                                                   f&quot;В заголовке ответа Content-Type с адреса {response.url} выставлен не ожидаемый тип передаваемого контента&quot;<br/>        assert int(response.headers[&#x27;Content-Length&#x27;]) == len(response.content),                                                        f&quot;Объем передаваемого контената с адреса {response.url} не соответствует указанному в заголовке Content-Length&quot;<br/>    <br/>&gt;       assert response.json() == [conf_eth_new]<br/><span class="error">E       AssertionError: assert [] == [{&#x27;connection...tis.ru&#x27;, ...}]</span><br/><span class="error">E         Right contains one more item: {&#x27;connection&#x27;: &#x27;static&#x27;, &#x27;dns_1&#x27;: &#x27;10.10.30.1&#x27;, &#x27;dns_2&#x27;: &#x27;10.10.30.2&#x27;, &#x27;domain&#x27;: &#x27;nartis.ru&#x27;, ...}</span><br/><span class="error">E         Full diff:</span><br/><span class="error">E           [</span><br/><span class="error">E         +  ,</span><br/><span class="error">E         -  {&#x27;connection&#x27;: &#x27;static&#x27;,</span><br/><span class="error">E         -   &#x27;dns_1&#x27;: &#x27;10.10.30.1&#x27;,</span><br/><span class="error">E         -   &#x27;dns_2&#x27;: &#x27;10.10.30.2&#x27;,...</span><br/><span class="error">E         </span><br/><span class="error">E         ...Full output truncated (9 lines hidden), use &#x27;-vv&#x27; to show</span><br/><br/>test_with_auth.py:392: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_with_auth.py::TestClassRSConfig::test_get_RS_with_auth</td>
+          <td class="col-duration">0.13</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;test_with_auth.TestClassRSConfig object at 0x0000027828FE5DE0&gt;<br/>form_head_for_get_auth = {&#x27;Authorization&#x27;: &#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2NjAyMjk4NjksImV4cCI6MTY2MDMxNjI2OSwiYXVkIjoibG...JzdWIiOiIxIiwianRpIjoiZDVkNjllOGYtN2E3MS00ZjM0LWExMTgtMDFlYjIxZDIwMzFjIn0.aaEeIGTC-rhfeNUkPwHZYGb_Gp1pFAUE-1pfAd1mPh8&#x27;}<br/><br/>    def test_get_RS_with_auth(self, form_head_for_get_auth):<br/>        key = &#x27;rs-485&#x27;<br/>        url = url_form_in_ip(key)+&#x27;/1&#x27;<br/>    <br/>        response = requests.get(url, headers=form_head_for_get_auth, timeout=10)<br/>    <br/>    <br/>        assert response.status_code == 200,                                                                                             f&quot;С адреса {response.url} получен ответ на запрос сервера не соответствующий требуемому&quot;<br/>        assert response.headers[&#x27;Content-Type&#x27;] == &#x27;application/json; charset=utf-8&#x27;,                                                   f&quot;В заголовке ответа Content-Type с адреса {response.url} выставлен не ожидаемый тип передаваемого контента&quot;<br/>        assert int(response.headers[&#x27;Content-Length&#x27;]) == len(response.content),                                                        f&quot;Объем передаваемого контената с адреса {response.url} не соответствует указанному в заголовке Content-Length&quot;<br/>&gt;       assert list(response.json().keys()) == [&#x27;id&#x27;, &#x27;baud&#x27;,&#x27;parity&#x27;,&#x27;data_bits&#x27;,&#x27;stop_bits&#x27;,&#x27;interface_id&#x27;,&#x27;res_port&#x27;],               &quot;Полученный список параметров интерфейса RS-485 от прибора УСПД не соответствует требуемому&quot;<br/><span class="error">E       AssertionError: Полученный список параметров интерфейса RS-485 от прибора УСПД не соответствует требуемому</span><br/><span class="error">E       assert [&#x27;id&#x27;, &#x27;baud&#x27;...nactive&#x27;, ...] == [&#x27;id&#x27;, &#x27;baud&#x27;...face_id&#x27;, ...]</span><br/><span class="error">E         At index 5 diff: &#x27;timeout_inactive&#x27; != &#x27;interface_id&#x27;</span><br/><span class="error">E         Left contains 2 more items, first extra item: &#x27;interface_id&#x27;</span><br/><span class="error">E         Full diff:</span><br/><span class="error">E           [</span><br/><span class="error">E            &#x27;id&#x27;,</span><br/><span class="error">E            &#x27;baud&#x27;,</span><br/><span class="error">E            &#x27;parity&#x27;,...</span><br/><span class="error">E         </span><br/><span class="error">E         ...Full output truncated (8 lines hidden), use &#x27;-vv&#x27; to show</span><br/><br/>test_with_auth.py:410: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_with_auth.py::TestClassRSConfig::test_put_RS_1_with_auth</td>
+          <td class="col-duration">0.26</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;test_with_auth.TestClassRSConfig object at 0x0000027828FE5D80&gt;<br/>form_head_for_get_auth = {&#x27;Authorization&#x27;: &#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2NjAyMjk4NjksImV4cCI6MTY2MDMxNjI2OSwiYXVkIjoibG...JzdWIiOiIxIiwianRpIjoiZDVkNjllOGYtN2E3MS00ZjM0LWExMTgtMDFlYjIxZDIwMzFjIn0.aaEeIGTC-rhfeNUkPwHZYGb_Gp1pFAUE-1pfAd1mPh8&#x27;}<br/><br/>    def test_put_RS_1_with_auth(self, form_head_for_get_auth):<br/>        key = &#x27;rs-485&#x27;<br/>        url = url_form_in_ip(key)+&#x27;/1&#x27;<br/>    <br/>        rs_conf_new = {&#x27;baud&#x27;: 1234, &#x27;parity&#x27;: 2,<br/>                        &#x27;data_bits&#x27;: 16, &#x27;stop_bits&#x27;: 2,<br/>                        &#x27;interface_id&#x27;: 1}<br/>    <br/>        response = requests.put(url, headers=form_head_for_get_auth, json=rs_conf_new, timeout=10)<br/>        res_get = requests.get(url, headers=form_head_for_get_auth, timeout=10).json()<br/>    <br/>    <br/>        assert response.status_code == 200,                                                                                             f&quot;С адреса {response.url} получен ответ на запрос сервера не соответствующий требуемому&quot;<br/>        assert response.headers[&#x27;Content-Type&#x27;] == &#x27;application/json; charset=utf-8&#x27;,                                                   f&quot;В заголовке ответа Content-Type с адреса {response.url} выставлен не ожидаемый тип передаваемого контента&quot;<br/>        assert int(response.headers[&#x27;Content-Length&#x27;]) == len(response.content),                                                        f&quot;Объем передаваемого контената с адреса {response.url} не соответствует указанному в заголовке Content-Length&quot;<br/>&gt;       assert response.json() == [{&#x27;id&#x27;: 1, &#x27;baud&#x27;: 1234, &#x27;parity&#x27;: 2,<br/>                                    &#x27;data_bits&#x27;: 16, &#x27;stop_bits&#x27;: 2, &#x27;interface_id&#x27;: 1}]<br/><span class="error">E       AssertionError: assert [{&#x27;baud&#x27;: 123...&#x27;id&#x27;: 1, ...}] == [{&#x27;baud&#x27;: 123..._id&#x27;: 1, ...}]</span><br/><span class="error">E         At index 0 diff: {&#x27;id&#x27;: 1, &#x27;baud&#x27;: 1234, &#x27;parity&#x27;: 2, &#x27;data_bits&#x27;: 16, &#x27;stop_bits&#x27;: 2, &#x27;timeout_inactive&#x27;: 3000, &#x27;byte_delay&#x27;: 75, &#x27;interface_id&#x27;: 1} != {&#x27;id&#x27;: 1, &#x27;baud&#x27;: 1234, &#x27;parity&#x27;: 2, &#x27;data_bits&#x27;: 16, &#x27;stop_bits&#x27;: 2, &#x27;interface_id&#x27;: 1}</span><br/><span class="error">E         Full diff:</span><br/><span class="error">E           [</span><br/><span class="error">E            {&#x27;baud&#x27;: 1234,</span><br/><span class="error">E         +   &#x27;byte_delay&#x27;: 75,</span><br/><span class="error">E             &#x27;data_bits&#x27;: 16,</span><br/><span class="error">E             &#x27;id&#x27;: 1,...</span><br/><span class="error">E         </span><br/><span class="error">E         ...Full output truncated (8 lines hidden), use &#x27;-vv&#x27; to show</span><br/><br/>test_with_auth.py:430: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassCheckPageGet::test_get_currenttime_with_auth</td>
+          <td class="col-duration">0.31</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassCheckPageGet::test_get_zonetime_with_auth</td>
+          <td class="col-duration">0.12</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassCheckPageGet::test_get_interfaces_with_auth</td>
+          <td class="col-duration">0.10</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassCheckPageGet::test_get_RS_with_auth</td>
+          <td class="col-duration">0.13</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassCheckPageGet::test_get_eth_with_auth</td>
+          <td class="col-duration">0.20</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassCheckPageGet::test_get_journal_discret_with_auth</td>
+          <td class="col-duration">0.34</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassCheckPageGet::test_get_timesynq_with_auth</td>
+          <td class="col-duration">0.60</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassCheckPageGet::test_get_powerjournal_with_auth</td>
+          <td class="col-duration">0.25</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassChengeConfigureStatus::test_post_confmode_configure_on_with_auth</td>
+          <td class="col-duration">0.77</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassChengeConfigureStatus::test_post_confmode_configure_off_with_auth</td>
+          <td class="col-duration">0.73</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassChangesNtpServers::test_get_ntpserver_with_auth</td>
+          <td class="col-duration">0.09</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassChangesNtpServers::test_post_add_ntpserver_with_auth</td>
+          <td class="col-duration">0.28</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassChangesNtpServers::test_put_update_ntpserver_with_auth</td>
+          <td class="col-duration">0.40</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassChangesNtpServers::test_delete_del_ntpserver_with_auth</td>
+          <td class="col-duration">0.40</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassGSMConfig::test_get_gsm_1_with_auth</td>
+          <td class="col-duration">0.10</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassGSMConfig::test_put_gsm_1_with_auth</td>
+          <td class="col-duration">0.46</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_with_auth.py::TestClassEthConfig::test_get_eth_1_with_auth</td>
+          <td class="col-duration">0.18</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody></table></body></html>
