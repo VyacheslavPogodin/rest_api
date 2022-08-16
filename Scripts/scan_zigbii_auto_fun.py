@@ -1,7 +1,7 @@
 
-from time import sleep
+from time import sleep, time
 import serial
-import sys, os
+import os
 
 reboot =  b'reboot\r'
 status = b'status\r'
@@ -36,18 +36,22 @@ def scaning_zigbee():
         channel_set_config(ser, network_config)
         set_coordination(ser)
 
-        if finding_device(ser, network_config):
-            while not drop_device(ser, network_config):
-                if finding_device(ser, network_config):
-                    print('Устройство осталось в этой же сети')
-                else:
-                    print('Устройство удалено из этой сети')
-                
-            return True
+        
+        while True:
+            FIND_DEV_NET = finding_device(ser, network_config)
+            sleep(15)
+            if FIND_DEV_NET:
+                print('Устройство осталось в этой же сети')
+            else:
+                print('Устройство удалено из этой сети')
+                break
+            FIND = True
+        FIND = False
+    
 
 
     ser.close()
-
+    return FIND
 
 
 
@@ -168,11 +172,12 @@ def drop_device(ser, net_conf):
             ser.write(drop)
             print('TX:    ',drop)
             send = None
+            
             while send != b'':
-                send = ser.readline()
-                print('RX:    ',send)
                 if send == b' Message has been sent to node with EUI: '+EUI_dev.encode()+b'\r\n':
                     drop_status = False
+                send = ser.readline()
+                print('RX:    ',send)
         return False
 
 
