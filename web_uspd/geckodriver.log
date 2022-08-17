@@ -1,0 +1,336 @@
+1660724615338	geckodriver	INFO	Listening on 127.0.0.1:51359
+1660724618407	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "51360" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileAhS76A"
+*** You are running in headless mode.
+1660724687136	geckodriver	INFO	Listening on 127.0.0.1:51412
+1660724690196	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "51413" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileBrbZtr"
+*** You are running in headless mode.
+1660724690537	Marionette	INFO	Marionette enabled
+1660724690540	Marionette	INFO	Listening on port 51422
+WebDriver BiDi listening on ws://localhost:51413
+Read port: 51422
+1660724690742	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileBrbZtr\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51413/devtools/browser/ac8b91eb-19db-4891-9b32-fc6f41adcf1e
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1660724719703	geckodriver	INFO	Listening on 127.0.0.1:51457
+1660724722761	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "51458" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofilekLjrQ2"
+*** You are running in headless mode.
+1660724723016	Marionette	INFO	Marionette enabled
+1660724723020	Marionette	INFO	Listening on port 51468
+WebDriver BiDi listening on ws://localhost:51458
+Read port: 51468
+1660724723206	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofilekLjrQ2\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51458/devtools/browser/2a9b0d85-7677-4c83-8583-75960651baa8
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1660724821774	geckodriver	INFO	Listening on 127.0.0.1:51575
+1660724824841	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "51576" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileAUAVcW"
+*** You are running in headless mode.
+1660724825101	Marionette	INFO	Marionette enabled
+1660724825105	Marionette	INFO	Listening on port 51587
+WebDriver BiDi listening on ws://localhost:51576
+Read port: 51587
+1660724825253	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileAUAVcW\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51576/devtools/browser/86c6bbd2-2c45-4e1c-b460-eecf57685eb3
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1660724876568	geckodriver	INFO	Listening on 127.0.0.1:51624
+1660724879628	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "51625" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileW9FYUa"
+*** You are running in headless mode.
+1660724879886	Marionette	INFO	Marionette enabled
+1660724879890	Marionette	INFO	Listening on port 51634
+WebDriver BiDi listening on ws://localhost:51625
+Read port: 51634
+1660724880090	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileW9FYUa\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51625/devtools/browser/311bdf36-9938-411e-a545-00e9ed77af37
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1660724896663	geckodriver	INFO	Listening on 127.0.0.1:51667
+1660724899727	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "51668" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileFKqknL"
+*** You are running in headless mode.
+1660724899983	Marionette	INFO	Marionette enabled
+1660724899986	Marionette	INFO	Listening on port 51677
+WebDriver BiDi listening on ws://localhost:51668
+Read port: 51677
+1660724900176	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileFKqknL\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51668/devtools/browser/6c348270-6870-4607-97ee-b804163516d6
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1660725462176	geckodriver	INFO	Listening on 127.0.0.1:49322
+1660725465227	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49323" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileYNg7jY"
+1660725465547	Marionette	INFO	Marionette enabled
+1660725465552	Marionette	INFO	Listening on port 49333
+WebDriver BiDi listening on ws://localhost:49323
+Read port: 49333
+1660725465764	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileYNg7jY\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49323/devtools/browser/4f1972fc-a7b7-4cbc-866b-d6cceef07133
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 577: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1660725548236	Marionette	INFO	Stopped listening on port 49333
+1660725559209	geckodriver	INFO	Listening on 127.0.0.1:49431
+1660725562282	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49432" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileu8jRB9"
+1660725562590	Marionette	INFO	Marionette enabled
+1660725562594	Marionette	INFO	Listening on port 49443
+WebDriver BiDi listening on ws://localhost:49432
+Read port: 49443
+1660725562674	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileu8jRB9\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49432/devtools/browser/d774bf82-56b9-456f-af55-43823ffedee4
+1660725584722	Marionette	INFO	Stopped listening on port 49443
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1660725593742	geckodriver	INFO	Listening on 127.0.0.1:49512
+1660725596778	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49513" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofilebB9Z14"
+1660725597049	Marionette	INFO	Marionette enabled
+1660725597053	Marionette	INFO	Listening on port 49523
+WebDriver BiDi listening on ws://localhost:49513
+Read port: 49523
+1660725597132	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofilebB9Z14\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49513/devtools/browser/c8dd8ab1-232f-4018-b07b-9d447a4e230a
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1660725765468	Marionette	INFO	Stopped listening on port 49523
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1660725880267	geckodriver	INFO	Listening on 127.0.0.1:49725
+1660725883326	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49727" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileLY6ZRm"
+1660725883582	Marionette	INFO	Marionette enabled
+1660725883586	Marionette	INFO	Listening on port 49737
+WebDriver BiDi listening on ws://localhost:49727
+Read port: 49737
+1660725883761	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileLY6ZRm\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49727/devtools/browser/1df9aaef-f4b5-4408-bba1-87847426463f
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1660725947931	Marionette	INFO	Stopped listening on port 49737
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1660725958195	geckodriver	INFO	Listening on 127.0.0.1:49859
+1660725961269	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49860" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileXqKd8z"
+1660725961521	Marionette	INFO	Marionette enabled
+1660725961526	Marionette	INFO	Listening on port 49870
+WebDriver BiDi listening on ws://localhost:49860
+Read port: 49870
+1660725961728	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileXqKd8z\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49860/devtools/browser/28c5fbcd-0735-4c80-8356-3bb3d92f3795
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1660726047485	Marionette	INFO	Stopped listening on port 49870
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1660726064961	geckodriver	INFO	Listening on 127.0.0.1:49929
+1660726067998	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49930" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileSVphav"
+1660726068262	Marionette	INFO	Marionette enabled
+1660726068266	Marionette	INFO	Listening on port 49939
+WebDriver BiDi listening on ws://localhost:49930
+Read port: 49939
+1660726068360	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileSVphav\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49930/devtools/browser/e1b505d6-d659-4b9e-bd8c-77116b8c3c3b
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1660726245143	Marionette	INFO	Stopped listening on port 49939
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1660726254873	geckodriver	INFO	Listening on 127.0.0.1:50002
+1660726257967	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50003" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileKk8Ei8"
+1660726258223	Marionette	INFO	Marionette enabled
+1660726258227	Marionette	INFO	Listening on port 50012
+WebDriver BiDi listening on ws://localhost:50003
+Read port: 50012
+1660726258387	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileKk8Ei8\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50003/devtools/browser/0d8b773c-e8cb-45db-8641-1e0f0c3850fc
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.error: services.settings: 
+  blocklists/addons-bloomfilters Signature failed  TypeError: NetworkError: Network request failed
+console.error: services.settings: 
+  Message: NetworkError: Network error: TypeError: NetworkError: Network request failed
+  Stack:
+    APIError@resource://services-settings/RemoteSettingsClient.jsm:117:1
+NetworkError@resource://services-settings/RemoteSettingsClient.jsm:121:5
+_adjustedError@resource://services-settings/RemoteSettingsClient.jsm:859:14
+maybeSync@resource://services-settings/RemoteSettingsClient.jsm:764:38
+
+1660726783018	Marionette	INFO	Stopped listening on port 50012
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+ocal\\Temp\\rust_mozprofileBerABp\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50070/devtools/browser/97d923c3-6a50-45a5-b0e7-50efbb94ee4e
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.error: (new TypeError("parent is null", "resource://devtools/client/inspector/shared/style-change-tracker.js", 67))
+TypeError: parent is null: canMutationImpactCurrentStyles@resource://devtools/client/inspector/shared/style-change-tracker.js:67:24
+onMutations@resource://devtools/client/inspector/shared/style-change-tracker.js:84:41
+_emit@resource://devtools/shared/event-emitter.js:242:32
+emit@resource://devtools/shared/event-emitter.js:186:18
+emit@resource://devtools/shared/event-emitter.js:330:18
+getMutations@resource://devtools/client/fronts/walker.js:312:10
+
+console.error: (new TypeError("container.node.targetFront is null", "resource://devtools/client/inspector/markup/markup.js", 2320))
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1660726714415	Marionette	INFO	Stopped listening on port 50080
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1660726735886	geckodriver	INFO	Listening on 127.0.0.1:50233
+1660726738928	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50234" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileaqjJAd"
+1660726739188	Marionette	INFO	Marionette enabled
+1660726739192	Marionette	INFO	Listening on port 50243
+WebDriver BiDi listening on ws://localhost:50234
+Read port: 50243
+1660726739357	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\POGODI~1\\AppData\\Local\\Temp\\rust_mozprofileaqjJAd\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50234/devtools/browser/ee2cbf9c-e4f7-471c-9439-0688427e04da
+JavaScript error: http://10.10.29.110/static/js/2.d1aacbe2.chunk.js, line 2: Error: Request failed with status code 401
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://10.10.29.110"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1660726780430	Marionette	INFO	Stopped listening on port 50243
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.

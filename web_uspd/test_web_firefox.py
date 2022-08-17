@@ -137,13 +137,34 @@ class TestWeb():
         for conf in list_config:
             assert conf in driver.page_source, "На странице "+ driver.current_url + f" отсутствует параметр {conf}" 
 
+    def test_delete_device(self):
+        list_config = (
+            'AUTOTEST',
+            '123456789',
+            '123456789ABCDEF0',
+            '11',
+            '21',
+            '31',
+        )
 
+        driver.autenification(url, driver)
+        sleep(3)
+        
+        driver.find_element_with_exeption(By.XPATH, '//*[@id="root"]/div[2]/div[2]/div/div[2]/ul/li[2]/a').click()
+        driver.find_element_with_exeption(By.XPATH, '//*[@id="root"]/div[2]/main/div[3]/table/tbody/tr[1]/td[9]/button[3]').click()
+        
+        driver.find_element_with_exeption(By.XPATH, '/html/body/div[2]/div[3]/div/div[2]/button[2]').click()
+        sleep(1)
+        driver.find_element_with_exeption(By.XPATH, '/html/body/div/div[2]/main/div[2]/div/div[2]/div/button[2]').click()
+   
+        for conf in list_config:
+            assert conf in driver.page_source, "На странице "+ driver.current_url + f" нет параметра {conf}, возможно устройство не удалено" 
 
+    def test_config_off(self):
 
-if __name__ == '__main__':
+        driver.autenification(url, driver)
+        sleep(3)
+        driver.find_element_with_exeption(By.XPATH, '/html/body/div/div[2]/div[2]/div/div[3]/ul/li[1]/a').click()
+        driver.find_element_with_exeption(By.XPATH, '/html/body/div/div[2]/main/div[2]/div[2]/div/div[1]/table/div/div/span/span[1]/input').click()
 
-
-    driver.autenification(url, driver)
-    sleep(3)
-
-    driver.find_element_with_exeption(By.XPATH, '//*[@id="root"]/div[2]/div[2]/div/div[3]/ul/li[1]').click()
+        
