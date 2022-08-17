@@ -36,11 +36,11 @@ def scaning_zigbee():
         channel_set_config(ser, network_config)
         set_coordination(ser)
 
-        
+        n = 0
         while True:
             FIND_DEV_NET = finding_device(ser, network_config)
-            sleep(15)
-            if FIND_DEV_NET:
+            n+=1
+            if FIND_DEV_NET or n < 4:
                 print('Устройство осталось в этой же сети')
             else:
                 print('Устройство удалено из этой сети')
@@ -152,6 +152,7 @@ def finding_device(ser, net_conf):
 
 def drop_device(ser, net_conf):
 
+    channel, pan = net_conf
 
     if target_network == net_conf:
         print('\n\t\033[32mУстройство в требуемой сети! \033[0m\n')
@@ -168,12 +169,12 @@ def drop_device(ser, net_conf):
         drop_status = True
         while drop_status:
             drop = b'drop_target "'+EUI_dev.encode()+b'"\r'
-            print('\n\t\033[31mЗапрос на удаление устройства из сети \033[0m\n')
+            print(f'\n\t\033[31mЗапрос на удаление устройства из сети channel is '+channel+', Pan ID set to '+pan+'\033[0m\n')
             ser.write(drop)
             print('TX:    ',drop)
             send = None
             
-            while send != b'':
+            while send not in (b'', b'DD Start node discovering DD\r\n', ):
                 if send == b' Message has been sent to node with EUI: '+EUI_dev.encode()+b'\r\n':
                     drop_status = False
                 send = ser.readline()
