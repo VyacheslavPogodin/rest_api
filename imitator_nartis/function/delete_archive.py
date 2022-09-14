@@ -36,12 +36,12 @@ def delete_archive_list():
         'meter_diagnostics_events',
         'meter_tangent_register',
         'meter_quality_register',
-        'meter_inputs_outputs_register',
-        'meter_time_correction_register',
+        'meter_discrete_inputs_outputs',
+        'meter_time_correction',
     )
 
     connection = create_connection(
-    "uspd", "admin", "kPZa83Uz2#0", "10.10.29.110", "5432")
+    "uspd", "admin", "kPZa83Uz2#0", "10.10.29.147", "5432")
 
     cur = connection.cursor()  
         

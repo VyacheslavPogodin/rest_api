@@ -47,7 +47,7 @@ def get_load_profile(send, ser, dict_device,):
     
     date_send_1 = send[47:52] + binascii.unhexlify(general_function.conv(str(send[52])).zfill(2)) + b'\x1e\x00\x00\x80\x00\x00'
     date_send_2 = send[47:52] + binascii.unhexlify(general_function.conv(str(send[52]+1)).zfill(2)) + b'\x00\x00\x00\x80\x00\x00'
-    answer_data = binascii.unhexlify(b'e6e700c401c100010102020e090c' + binascii.hexlify(date_send_1) + b'06'+load_profile['A+']+b'06'+load_profile['A-'] + b'06'+load_profile['R+'] + b'06'+load_profile['R-']+b'06'+load_profile['No_name_1']+b'06'+load_profile['No_name_2']+b'06'+load_profile['No_name_3']+b'06'+load_profile['No_name_4']+b'06'+load_profile['Ua']+b'06'+load_profile['Ub']+b'06'+load_profile['Uc']+b'10'+load_profile['Term']+b'06'+load_profile['uptime']+b'020e090c' + binascii.hexlify(date_send_2) +b'06'+load_profile['A+']+b'06'+load_profile['A-']+b'06'+load_profile['R+'][:2])
+    answer_data = binascii.unhexlify(b'e6e700c401c1000102020e090c' + binascii.hexlify(date_send_1) + b'06'+load_profile['A+']+b'06'+load_profile['A-'] + b'06'+load_profile['R+'] + b'06'+load_profile['R-']+b'06'+load_profile['No_name_1']+b'06'+load_profile['No_name_2']+b'06'+load_profile['No_name_3']+b'06'+load_profile['No_name_4']+b'06'+load_profile['Ua']+b'06'+load_profile['Ub']+b'06'+load_profile['Uc']+b'10'+load_profile['Term']+b'06'+load_profile['uptime']+b'020e090c' + binascii.hexlify(date_send_2) +b'06'+load_profile['A+']+b'06'+load_profile['A-']+b'06'+load_profile['R+'])
     heading_answer = b'~'+general_function.crc16(general_function.crc16(b'\xa8'+general_function.len_send(answer_data)+send[4:5]+send[2:4]+b'R')+answer_data)+b'~'
     ser.write(heading_answer)
     general_function.print_term_and_write_log(heading_answer)
@@ -56,7 +56,7 @@ def get_load_profile(send, ser, dict_device,):
         send = general_function.function_read_rs_485(ser, dict_device,)
         general_function.print_term_and_write_log(send)
         if send[5:6] == b'Q':
-            answer_data = binascii.unhexlify(load_profile['R+'][2:]+b'06'+load_profile['R-']+b'06'+load_profile['No_name_1']+b'06'+load_profile['No_name_2']+b'06'+load_profile['No_name_3']+b'06'+load_profile['No_name_4']+b'06'+load_profile['Ua']+b'06'+load_profile['Ub']+b'06'+load_profile['Uc']+b'10'+load_profile['Term']+b'06'+load_profile['uptime'])
+            answer_data = binascii.unhexlify(b'06'+load_profile['R-']+b'06'+load_profile['No_name_1']+b'06'+load_profile['No_name_2']+b'06'+load_profile['No_name_3']+b'06'+load_profile['No_name_4']+b'06'+load_profile['Ua']+b'06'+load_profile['Ub']+b'06'+load_profile['Uc']+b'10'+load_profile['Term']+b'06'+load_profile['uptime'])
             heading_answer = b'~'+general_function.crc16(general_function.crc16(b'\xa0'+general_function.len_send(answer_data)+send[4:5]+send[2:4]+b'T')+answer_data)+b'~'
             ser.write(heading_answer)
             general_function.print_term_and_write_log(heading_answer)

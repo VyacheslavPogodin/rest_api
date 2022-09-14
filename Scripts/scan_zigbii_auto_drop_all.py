@@ -11,7 +11,7 @@ form = b'form "747070536D617274"\r'
 query = b'query_neighbor\r'
 
 target_network = ('13', '0x1799') #Параметры целевой сети
-EUI_dev = '81C4B716006F0D00' #'21841F16006F0D00'
+EUI_dev = '4982B30B006F0D00' #'21841F16006F0D00'
 #ramina 'FA20EC03006F0D00' , 4982B30B006F0D00 , 81C4B716006F0D00, 21841F16006F0D00, 5A645D16006F0D00, 0F255C16006F0D00
 
 comport = 'COM9'
@@ -173,16 +173,13 @@ def drop_device(ser, net_conf):
             drop = b'drop_target "'+EUI_dev.encode()+b'"\r'
             drop_all = b'drop_all\r'
             print(f'\n\t\033[31mЗапрос на удаление устройства из сети channel is '+channel+', Pan ID set to '+pan+'\033[0m\n')
-            ser.write(drop)
-            print('TX:    ',drop)
+            ser.write(drop_all)
+            print('TX:    ',drop_all)
             send = None
             
             while send != b'':
-                if send == b' Message has been sent to node with EUI: '+EUI_dev.encode()+b'\r\n':
+                if send == b'DROP ALL NODES message was sent\r\n':
                     drop_status = False
-                if send == b'DD Start node discovering DD\r\n':
-                    finding_device(ser, net_conf)
-                    break
                 send = ser.readline()
                 print('RX:    ',send)
         return False

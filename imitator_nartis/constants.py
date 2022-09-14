@@ -3,7 +3,7 @@
 
 from function import general_function
 
-archve_constant = {
+archve_constant_dec = {
     'A+_0' : 1000,              # 1.0.1.8.0.255 Активная энергия, импорт суммарный
     'A+_1' : 101,               # 1.0.1.8.1.255 Активная энергия, импорт по 1 тарифу
     'A+_2' : 102,               # 1.0.1.8.2.255 Активная энергия, импорт по 2 тарифу
@@ -42,7 +42,7 @@ archve_constant = {
     'R-_8' : 408,               # 1.0.3.8.8.255 Реативная энергия, экспорт по 8 тарифу
 }
 
-load_profile_constant = {
+load_profile_constant_dec = {
     'A+' : 101,             # 1.0.1.29.0.255  Импорт активной энергии за период записи
     'A-' : 102,             # 1.0.2.29.0.255  Экспорт активной энергии за период записи
     'R+' : 103,             # 1.0.3.29.0.255  Реактивная энергия, импорт за период записи
@@ -144,25 +144,61 @@ volt_reg_constants = {
     'voltage_deviation_time' : 30 #min 10   # 0.0.96.8.10.255  Длительность провала/ перенапряжения
 }
 
+requestr_quality_dec = {
+    'voltage_a' : 0,
+    'voltage_b' : 1,
+    'voltage_c' : 2,
+    'current_a' : 3,
+    'current_b' : 4,
+    'current_c' : 5,
+    'frequency' : 6,
+    'phase_a_pow_fact' : 9,
+    'phase_b_pow_fact' : 10,
+    'phase_c_pow_fact' : 11,
+    'angle_1' : 13,
+    'angle_2' : 14,
+    'angle_3' : 15,
+    'activ_power_a' : 16,
+    'activ_power_b' : 17,
+    'activ_power_c' : 18,
+    'react_pow_a' : 19,
+    'react_pow_b' : 20,
+    'react_pow_c' : 21,
+    'full_pow' : 22,
+    'activ_power' : 101,
+    'common_pow_fact': 111,
+    'full_pow_a': 113,
+    'full_pow_b': 114,
+    'full_pow_c': 115,
+    'react_pow' : 116,
+    'line_voltage_ab' : 124,
+    'line_voltage_bc' : 125,
+    'line_voltage_ca' : 126,
+}
+
+
+
 def archives_constant_fun():
-    for i in archve_constant.keys():
-        archve_constant[i] = general_function.conv(str(archve_constant[i])).zfill(8).encode()
+    archve_constant = {}
+    for i in archve_constant_dec.keys():
+        archve_constant[i] = general_function.conv(str(archve_constant_dec[i])).zfill(8).encode()
     return archve_constant
 
 def load_profile_constant_fun():
-    load_profile_constant['A+'] = general_function.conv(str(load_profile_constant['A+'])).zfill(8).encode()
-    load_profile_constant['A-'] = general_function.conv(str(load_profile_constant['A-'])).zfill(8).encode()
-    load_profile_constant['R+'] = general_function.conv(str(load_profile_constant['R+'])).zfill(8).encode()
-    load_profile_constant['R-'] = general_function.conv(str(load_profile_constant['R-'])).zfill(8).encode()
-    load_profile_constant['No_name_1'] = general_function.conv(str(load_profile_constant['No_name_1'])).zfill(8).encode()
-    load_profile_constant['No_name_2'] = general_function.conv(str(load_profile_constant['No_name_2'])).zfill(8).encode()
-    load_profile_constant['No_name_3'] = general_function.conv(str(load_profile_constant['No_name_3'])).zfill(8).encode()
-    load_profile_constant['No_name_4'] = general_function.conv(str(load_profile_constant['No_name_4'])).zfill(8).encode()
-    load_profile_constant['Ua'] = general_function.conv(str(load_profile_constant['Ua'])).zfill(8).encode()
-    load_profile_constant['Ub'] = general_function.conv(str(load_profile_constant['Ub'])).zfill(8).encode()
-    load_profile_constant['Uc'] = general_function.conv(str(load_profile_constant['Uc'])).zfill(8).encode()
-    load_profile_constant['Term'] = general_function.conv(str(load_profile_constant['Term'])).zfill(4).encode()
-    load_profile_constant['uptime'] = general_function.conv(str(load_profile_constant['uptime'])).zfill(4).encode()
+    load_profile_constant = {}
+    load_profile_constant['A+'] = general_function.conv(str(load_profile_constant_dec['A+'])).zfill(8).encode()
+    load_profile_constant['A-'] = general_function.conv(str(load_profile_constant_dec['A-'])).zfill(8).encode()
+    load_profile_constant['R+'] = general_function.conv(str(load_profile_constant_dec['R+'])).zfill(8).encode()
+    load_profile_constant['R-'] = general_function.conv(str(load_profile_constant_dec['R-'])).zfill(8).encode()
+    load_profile_constant['No_name_1'] = general_function.conv(str(load_profile_constant_dec['No_name_1'])).zfill(8).encode()
+    load_profile_constant['No_name_2'] = general_function.conv(str(load_profile_constant_dec['No_name_2'])).zfill(8).encode()
+    load_profile_constant['No_name_3'] = general_function.conv(str(load_profile_constant_dec['No_name_3'])).zfill(8).encode()
+    load_profile_constant['No_name_4'] = general_function.conv(str(load_profile_constant_dec['No_name_4'])).zfill(8).encode()
+    load_profile_constant['Ua'] = general_function.conv(str(load_profile_constant_dec['Ua'])).zfill(8).encode()
+    load_profile_constant['Ub'] = general_function.conv(str(load_profile_constant_dec['Ub'])).zfill(8).encode()
+    load_profile_constant['Uc'] = general_function.conv(str(load_profile_constant_dec['Uc'])).zfill(8).encode()
+    load_profile_constant['Term'] = general_function.conv(str(load_profile_constant_dec['Term'])).zfill(4).encode()
+    load_profile_constant['uptime'] = general_function.conv(str(load_profile_constant_dec['uptime'])).zfill(8).encode()
     return load_profile_constant
 
 def access_reg_constant_fun():
@@ -228,3 +264,35 @@ def volt_reg_constants_fun():
     volt_reg_constants['voltage_deviation_time'] = general_function.conv(str(int(volt_reg_constants['voltage_deviation_time']/10))).zfill(8).encode()
     return volt_reg_constants
 
+def request_quality_fun():
+    requestr_quality = {}
+    requestr_quality['frequency'] = general_function.conv(str(requestr_quality_dec['frequency']*1000)).zfill(8).encode()
+    requestr_quality['current_a'] = general_function.conv(str(requestr_quality_dec['current_a']*1000)).zfill(8).encode()
+    requestr_quality['current_b'] = general_function.conv(str(requestr_quality_dec['current_b']*1000)).zfill(8).encode()
+    requestr_quality['current_c'] = general_function.conv(str(requestr_quality_dec['current_c']*1000)).zfill(8).encode()
+    requestr_quality['voltage_a'] = general_function.conv(str(requestr_quality_dec['voltage_a']*1000)).zfill(8).encode()
+    requestr_quality['voltage_b'] = general_function.conv(str(requestr_quality_dec['voltage_b']*1000)).zfill(8).encode()
+    requestr_quality['voltage_c'] = general_function.conv(str(requestr_quality_dec['voltage_c']*1000)).zfill(8).encode()
+    requestr_quality['common_pow_fact'] = general_function.conv(str(requestr_quality_dec['common_pow_fact']*1000000)).zfill(8).encode()
+    requestr_quality['phase_a_pow_fact'] = general_function.conv(str(requestr_quality_dec['phase_a_pow_fact']*1000000)).zfill(8).encode()
+    requestr_quality['phase_b_pow_fact'] = general_function.conv(str(requestr_quality_dec['phase_b_pow_fact']*1000000)).zfill(8).encode()
+    requestr_quality['phase_c_pow_fact'] = general_function.conv(str(requestr_quality_dec['phase_c_pow_fact']*1000000)).zfill(8).encode()
+    requestr_quality['full_pow'] = general_function.conv(str(requestr_quality_dec['full_pow']*1000)).zfill(8).encode()
+    requestr_quality['full_pow_a'] = general_function.conv(str(requestr_quality_dec['full_pow_a']*1000)).zfill(8).encode()
+    requestr_quality['full_pow_b'] = general_function.conv(str(requestr_quality_dec['full_pow_b']*1000)).zfill(8).encode()
+    requestr_quality['full_pow_c'] = general_function.conv(str(requestr_quality_dec['full_pow_c']*1000)).zfill(8).encode()
+    requestr_quality['activ_power'] = general_function.conv(str(requestr_quality_dec['activ_power']*1000)).zfill(8).encode()
+    requestr_quality['activ_power_a'] = general_function.conv(str(requestr_quality_dec['activ_power_a']*1000)).zfill(8).encode()
+    requestr_quality['activ_power_b'] = general_function.conv(str(requestr_quality_dec['activ_power_b']*1000)).zfill(8).encode()
+    requestr_quality['activ_power_c'] = general_function.conv(str(requestr_quality_dec['activ_power_c']*1000)).zfill(8).encode()
+    requestr_quality['react_pow'] = general_function.conv(str(requestr_quality_dec['react_pow']*1000)).zfill(8).encode()
+    requestr_quality['react_pow_a'] = general_function.conv(str(requestr_quality_dec['react_pow_a']*1000)).zfill(8).encode()
+    requestr_quality['react_pow_b'] = general_function.conv(str(requestr_quality_dec['react_pow_b']*1000)).zfill(8).encode()
+    requestr_quality['react_pow_c'] = general_function.conv(str(requestr_quality_dec['react_pow_c']*1000)).zfill(8).encode()
+    requestr_quality['line_voltage_ab'] = general_function.conv(str(requestr_quality_dec['line_voltage_ab']*1000)).zfill(8).encode()
+    requestr_quality['line_voltage_bc'] = general_function.conv(str(requestr_quality_dec['line_voltage_bc']*1000)).zfill(8).encode()
+    requestr_quality['line_voltage_ca'] = general_function.conv(str(requestr_quality_dec['line_voltage_ca']*1000)).zfill(8).encode()
+    requestr_quality['angle_1'] = general_function.conv(str(requestr_quality_dec['angle_1']*1000)).zfill(8).encode()
+    requestr_quality['angle_2'] = general_function.conv(str(requestr_quality_dec['angle_2']*1000)).zfill(8).encode()
+    requestr_quality['angle_3'] = general_function.conv(str(requestr_quality_dec['angle_3']*1000)).zfill(8).encode()
+    return requestr_quality

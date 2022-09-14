@@ -97,7 +97,7 @@ def get_monthly_archive_scale(send, ser, dict_device,):
 def get_monthly_archive(send, ser, dict_device, ):
 
     date_send = send[61:64] + b'\x01\xff\x00\x00\x00\x00\x80\x00\x00'
-    answer_data = binascii.unhexlify(b'e6e700c401c10001010226090c' + binascii.hexlify(date_send) +b'06'+arch_const['A+_1']+b'06'+arch_const['A+_2']+b'06'+arch_const['A+_3']+b'06'+arch_const['A+_4']+b'06'+arch_const['A+_5']+b'06'+arch_const['A+_6']+b'06'+arch_const['A+_7']+b'06'+arch_const['A+_8']+b'06'+arch_const['A+_0']+b'06'+arch_const['A-_1']+b'06'+arch_const['A-_2']+b'06'+arch_const['A-_3']+b'06'+arch_const['A-_4']+b'06'+arch_const['A-_5']+b'06'+arch_const['A-_6']+b'06'+arch_const['A-_7']+b'06'+arch_const['A-_8'][:4])
+    answer_data = binascii.unhexlify(b'e6e700c401c10001010229090c' + binascii.hexlify(date_send) +b'06'+arch_const['A+_1']+b'06'+arch_const['A+_2']+b'06'+arch_const['A+_3']+b'06'+arch_const['A+_4']+b'06'+arch_const['A+_5']+b'06'+arch_const['A+_6']+b'06'+arch_const['A+_7']+b'06'+arch_const['A+_8']+b'06'+arch_const['A+_0']+b'06'+arch_const['A-_1']+b'06'+arch_const['A-_2']+b'06'+arch_const['A-_3']+b'06'+arch_const['A-_4']+b'06'+arch_const['A-_5']+b'06'+arch_const['A-_6']+b'06'+arch_const['A-_7']+b'06'+arch_const['A-_8'])
     heading_answer = b'~'+general_function.crc16(general_function.crc16(b'\xa8'+general_function.len_send(answer_data)+send[4:5]+send[2:4]+b'R')+answer_data)+b'~'
     ser.write(heading_answer)
     general_function.print_term_and_write_log(heading_answer)
@@ -106,7 +106,7 @@ def get_monthly_archive(send, ser, dict_device, ):
         send = general_function.function_read_rs_485(ser, dict_device,)
         general_function.print_term_and_write_log(send)
         if send[5:6] == b'Q':
-            answer_data = binascii.unhexlify(arch_const['A-_8'][:4]+b'06'+arch_const['A-_0']+b'06'+arch_const['R+_1']+b'06'+arch_const['R+_2']+b'06'+arch_const['R+_3']+b'06'+arch_const['R+_4']+b'06'+arch_const['R+_5']+b'06'+arch_const['R+_6']+b'06'+arch_const['R+_7']+b'06'+arch_const['R+_8']+b'06'+arch_const['R+_0']+b'06'+arch_const['R-_1']+b'06'+arch_const['R-_2']+b'06'+arch_const['R-_2']+b'06'+arch_const['R-_3']+b'06'+arch_const['R-_4']+b'06'+arch_const['R-_5']+b'06'+arch_const['R-_6']+b'06'+arch_const['R-_7']+b'06'+arch_const['R-_8']+b'06'+arch_const['R-_0']+b'06000000010600000001060000000106000000ff')
+            answer_data = binascii.unhexlify(b'06'+arch_const['A-_0']+b'06'+arch_const['R+_1']+b'06'+arch_const['R+_2']+b'06'+arch_const['R+_3']+b'06'+arch_const['R+_4']+b'06'+arch_const['R+_5']+b'06'+arch_const['R+_6']+b'06'+arch_const['R+_7']+b'06'+arch_const['R+_8']+b'06'+arch_const['R+_0']+b'06'+arch_const['R-_1']+b'06'+arch_const['R-_2']+b'06'+arch_const['R-_3']+b'06'+arch_const['R-_4']+b'06'+arch_const['R-_5']+b'06'+arch_const['R-_6']+b'06'+arch_const['R-_7']+b'06'+arch_const['R-_8']+b'06'+arch_const['R-_0']+b'06000000010600000001060000000106000000ff')
             heading_answer = b'~'+general_function.crc16(general_function.crc16(b'\xa0'+general_function.len_send(answer_data)+send[4:5]+send[2:4]+b'T')+answer_data)+b'~'
             ser.write(heading_answer)
             n+=1

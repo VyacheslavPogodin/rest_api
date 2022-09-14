@@ -1,5 +1,6 @@
 
 from datetime import datetime
+from time import sleep
 import serial, os
 import binascii
 import psycopg2
@@ -16,7 +17,7 @@ def assign_port():
             database='uspd',
             user='admin',
             password='kPZa83Uz2#0',
-            host='10.10.29.110',
+            host= '10.10.29.147',
             port='5432',
         )
         #print("Connection to PostgreSQL DB successful")
@@ -59,7 +60,7 @@ def creat_dict_device():
 def initSerial():
     ser = serial.Serial()
     ser.baudrate = 9600
-    ser.port = 'COM6'
+    ser.port = 'COM2'
     ser.stopbits = serial.STOPBITS_ONE
     ser.bytesize = 8
     ser.parity = serial.PARITY_NONE
@@ -118,7 +119,7 @@ def print_term_and_write_log(info_send):
 
     else:
         print("\n\t\t" + "\033[32m{}".format(info_send) + "\n")
-        with open('log_imitator.log', 'a') as f:
+        with open('log_imitator_nartis.log', 'a') as f:
             print("\n\t\t" + info_send + "\n", file=f)
 
 
@@ -126,15 +127,38 @@ def function_read_rs_485(ser, dict_device):
     send_all=b''
     len_send_all = -2
     checking_the_message = False
+    num_breake = 0
     while ser.inWaiting()==0:
-        pass
+        sleep(0.05)
+        num_breake+=1
+        if num_breake == 2400:
+            print_term_and_write_log('Нет данных от УСПД, проверьте соединение')
+            ser.close()
+            sleep(0.5)
+            ser.open()
+            num_breake = 0
     while True:
         send = ser.read()
         send_all += send
-        if len(send_all) == 3 and send_all[0] == 126:
-            len_send_all = send[0]
-        elif send == b'':
+        if send_all[0] != 126:
+            send_all = b''
+        elif len(send_all) == 4 and send_all[0] == 126:
+            if send_all[1] == 126:
+                len_send_all = send_all[3]
+                send_all = send_all[1:]
+            else:
+                len_send_all = send_all[2]
+        elif len(send_all)>128 or (len(send_all)==len_send_all+2 and send != b'~'):
+            print_term_and_write_log('Ошибка длинны сообщения или флага конца сообщения')
+            print_term_and_write_log(send_all)
+            send_all = b''
             break
+
+        elif send == b'':
+            print_term_and_write_log('Нет связи с УСПД, проверьте соединение')
+            send_all = b''
+            break
+
         elif len(send_all)==len_send_all+2 and send == b'~':
             send_all = send_all.strip(b'~')
             break
