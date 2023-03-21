@@ -55,16 +55,16 @@ load_profile_constant_dec = {
     'Ub' : 12,              # 1.0.52.27.0.255 Напряжение фазы B
     'Uc' : 13,              # 1.0.72.27.0.255 Напряжение фазы C
     'Term': 20,             # 0.0.96.9.0.255  Температура, С°
-    'uptime' : 1100,        # 0.0.96.8.0.255   Время работы ПУ
+    'uptime' : 500,        # 0.0.96.8.0.255   Время работы ПУ
 }
 
 # Данные для журнала Контроль доступа meter_access_events (access_events_function.py)
-# event: 9; source: 69; timestamp: 2022-06-21 12:59:59; comment: uptime: 255; 
+# event: 9; source: 69; timestamp: 2022-06-21 12:59:59; comment: uptime: 6000; 
 access_reg_constant = {
     'event' : 1, # 0т 1 до 2       # 0.0.96.11.6.255   Код события СПОДЭС
     'cannel' : 1,                  # 0.0.96.12.4.255  Номер канала (интерфейс)
     'client': 20,  # 10,20 или 30  # 0.0.96.12.6.255  Адрес (клиента)
-    'uptime' : 1100,               # 0.0.96.8.0.255   Время работы ПУ
+    'uptime' : 6000,               # 0.0.96.8.0.255   Время работы ПУ
 }
 
 # Данные для журнала Комуникационных событий meter_communication_events (com_events_function.py)
@@ -73,42 +73,42 @@ com_events_reg_constant = {
     'event' : 1, # 0т 1 до 2       # 0.0.96.11.5.255   Код события СПОДЭС
     'cannel' : 1,                  # 0.0.96.12.4.255  Номер канала (интерфейс)
     'client': 20,  # 10,20 или 30  # 0.0.96.12.6.255  Адрес (клиента)
-    'uptime' : 1100,               # 0.0.96.8.0.255   Время работы ПУ
+    'uptime' : 5000,               # 0.0.96.8.0.255   Время работы ПУ
 }
 
 # Данные для журнала Токов meter_current_register (current_reg_function.py)
 # event: 29; source: 70; timestamp: 2022-06-21 12:59:59; comment: uptime: 255; 
 current_reg_constant = {
     'event' : 1,           # до 1 от 31     # 0.0.96.11.1.255  Код события 
-    'uptime' : 1600,                        # 0.0.96.8.0.255   Время работы ПУ
+    'uptime' : 1000,                        # 0.0.96.8.0.255   Время работы ПУ
 }
 
 # Данные для журнала Самодиагностики meter_diagnostics_events (diagnostics_events_function.py)
 # event: 29; source: 70; timestamp: 2022-06-21 12:59:59; comment: uptime: 255; 
 diagnostics_reg_constant = {
     'event' : 1,           # до 1 от 4     # 0.0.96.11.7.255  Код события 
-    'uptime' : 1500,                        # 0.0.96.8.0.255   Время работы ПУ
+    'uptime' : 7000,                        # 0.0.96.8.0.255   Время работы ПУ
 }
 
 # Данные для журнала Внешних воздействий meter_external_eventsr (external_events_function.py)
 # event: 8; source: 67; timestamp: 2022-06-21 12:59:59; comment: uptime: 255;  
 external_reg_constant = {
     'event' : 1,           # до 1 от 4     # 0.0.96.11.4.255  Код события 
-    'uptime' : 1400,                        # 0.0.96.8.0.255   Время работы ПУ
+    'uptime' : 4000,                        # 0.0.96.8.0.255   Время работы ПУ
 }
 
 # Данные для журнала Включений выключений meter_on_off_and_relay_register (on_off_reg_function.py)
 # event: 4; source: 45; timestamp: 2022-06-21 12:59:59; comment: uptime: 255;  
 on_off_reg_constant = {
     'event' : 1,           # до 1 от 17     # 0.0.96.11.2.255  Код события 
-    'uptime' : 1300,                        # 0.0.96.8.0.255   Время работы ПУ
+    'uptime' : 2000,                        # 0.0.96.8.0.255   Время работы ПУ
 }
 
 # Данные для журнала Пареметров качества сети meter_quality_register (quality_reg_function.py)
 # event: 33; source: 78; timestamp: 2022-06-21 12:59:59; comment: uptime: 255; 
 quality_reg_constant = {
     'quality' : 1, #1,2,4,8,10,20,40,80      # 0.0.96.5.1.255  Статус качества сети 
-    'uptime' : 1200,                        # 0.0.96.8.0.255   Время работы ПУ
+    'uptime' : 9000,                        # 0.0.96.8.0.255   Время работы ПУ
 }
 
 # Данные для журнала Коррекции данных meter_reconfig_register (reconfig_reg_function.py)
@@ -117,28 +117,28 @@ reconfig_reg_constant = {
     'event' : 1,                   # 0.0.96.11.3.255   Код события СПОДЭС, значения от 1 до 68
     'cannel' : 1,                  # 0.0.96.12.4.255  Номер канала (интерфейс)
     'client': 20,  # 10,20 или 30  # 0.0.96.12.6.255  Адрес (клиента)
-    'uptime' : 1100,               # 0.0.96.8.0.255   Время работы ПУ
+    'uptime' : 3000,               # 0.0.96.8.0.255   Время работы ПУ
 }
 
 # Данные для журнала Превышение тангенса meter_tangent_register (tangent_reg_function.py)
 # event: 11; source: 77; timestamp: 2022-06-21 12:59:59; comment: uptime: 255; 
 tangent_reg_constant = {
     'event' : 1,                 # 0.0.96.11.8.255   Код события СПОДЭС, значения 1 или 2
-    'uptime' : 1000,             # 0.0.96.8.0.255   Время работы ПУ
+    'uptime' : 8000,             # 0.0.96.8.0.255   Время работы ПУ
 }
 
 # Данные для журнала Коррекции времени meter_time_correction_register (time_correct_reg_function.py)
 #event: 31; source: 96; timestamp: 2022-06-22 06:44:19; comment: uptime: 1781110; old_time: 2022-06-22  06:44:18;
 # Новое время в ответном сообщении формируется на конец часа времени запроса xx:59:59, старое на 59 секунд меньше xx:59:00
 time_correct_reg_constant = {
-    'uptime' : 900,               # 0.0.96.8.0.255   Время работы ПУ
+    'uptime' : 13000,               # 0.0.96.8.0.255   Время работы ПУ
 }
 
 #  Данные для журнала Напряжений meter_voltage_register (volt_reg_function.py)
 #  event: 10; source: 15; timestamp: 2022-06-21 16:59:59; comment: uptime: 255; phase_voltage: 0.001000; voltage_deviation_value: 0.002000; voltage_deviation_time: 30.000000;
 volt_reg_constants = {
     'event' : 10,                           # 0.0.96.11.0.255   Код события СПОДЭС, значения от 1 до 26
-    'uptime' : 300,                         # 0.0.96.8.0.255   Время работы ПУ
+    'uptime' : 100,                         # 0.0.96.8.0.255   Время работы ПУ
     'phase_voltage' : 1,                    # 1.0.12.7.0.255  Напряжение любой фазы
     'voltage_deviation_value' : 2,          # 1.0.12.7.4.255  Глубина провала/ перенапряжения
     'voltage_deviation_time' : 30 #min 10   # 0.0.96.8.10.255  Длительность провала/ перенапряжения
@@ -155,9 +155,9 @@ requestr_quality_dec = {
     'phase_a_pow_fact' : 9,
     'phase_b_pow_fact' : 10,
     'phase_c_pow_fact' : 11,
-    'angle_1' : 13,
-    'angle_2' : 14,
-    'angle_3' : 15,
+    'angle_1' : 120,
+    'angle_2' : 0,
+    'angle_3' : 0,
     'activ_power_a' : 16,
     'activ_power_b' : 17,
     'activ_power_c' : 18,
@@ -174,6 +174,11 @@ requestr_quality_dec = {
     'line_voltage_ab' : 124,
     'line_voltage_bc' : 125,
     'line_voltage_ca' : 126,
+    'tang_fi_A' : 128,
+    'tang_fi_B' : 129,
+    'tang_fi_C' : 130,
+    'tang_fi_full' : 131,
+
 }
 
 
@@ -295,4 +300,9 @@ def request_quality_fun():
     requestr_quality['angle_1'] = general_function.conv(str(requestr_quality_dec['angle_1']*1000)).zfill(8).encode()
     requestr_quality['angle_2'] = general_function.conv(str(requestr_quality_dec['angle_2']*1000)).zfill(8).encode()
     requestr_quality['angle_3'] = general_function.conv(str(requestr_quality_dec['angle_3']*1000)).zfill(8).encode()
+    requestr_quality['tang_fi_A'] = general_function.conv(str(requestr_quality_dec['tang_fi_A']*10000)).zfill(8).encode()
+    requestr_quality['tang_fi_B'] = general_function.conv(str(requestr_quality_dec['tang_fi_B']*10000)).zfill(8).encode()
+    requestr_quality['tang_fi_C'] = general_function.conv(str(requestr_quality_dec['tang_fi_C']*10000)).zfill(8).encode()
+    requestr_quality['tang_fi_full'] = general_function.conv(str(requestr_quality_dec['tang_fi_full']*10000)).zfill(8).encode()
+
     return requestr_quality

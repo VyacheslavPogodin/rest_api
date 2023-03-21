@@ -41,7 +41,7 @@ def delete_archive_list():
     )
 
     connection = create_connection(
-    "uspd", "admin", "kPZa83Uz2#0", "10.10.29.147", "5432")
+    "uspd", "admin", "kPZa83Uz2#0", "10.10.29.109", "5432")
 
     cur = connection.cursor()  
         

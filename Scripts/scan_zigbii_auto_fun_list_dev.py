@@ -15,8 +15,8 @@ join_network = b'join 0xFF\r'
 role = b'get_id\r'
 
 
-target_network = ('11', '0x1111', '') #Параметры целевой сети
-EUI_dev = '3FA1F8FEFF8D79E0' #, '0F255C16006F0D00' '0FA0F8FEFF8D79E0' '3211FC16006F0D00' '709EF8FEFF8D79E0' '21841F16006F0D00' 9B04A514006F0D00  EC64A7FEFF8D79E0, EEA06A16006F0D00 'E7B99600006F0D00'
+target_network = ('11', '0x9417', '') #Параметры целевой сети
+EUI_DEVICE_TUPLE = ('3211FC16006F0D00', '0F255C16006F0D00', '0FA0F8FEFF8D79E0', '709EF8FEFF8D79E0', '21841F16006F0D00', '9B04A514006F0D00',  'EC64A7FEFF8D79E0', 'EEA06A16006F0D00', 'E7B99600006F0D00')
 #ramina 'FA20EC03006F0D00' , 4982B30B006F0D00 , 81C4B716006F0D00, 21841F16006F0D00, 5A645D16006F0D00, 0F255C16006F0D00
 
 comport = 'COM9'
@@ -24,32 +24,22 @@ comport = 'COM9'
 
 
 
-def scaning_zigbee():
+def scaning_zigbee(EUI_DEVICE_TUPLE):
     with serial.Serial(comport, 115200, timeout=40) as ser:
-    
         LIST_NETWORK = network_scanning(ser)
 
         for network_config in LIST_NETWORK:
             if network_config[0] == target_network[0] and network_config[1] == target_network[1]:
                 STOP_STEP = False
             else:
-                channel_set_config(ser, network_config) #Устанавливаем нужную сеть
-                # if network_config[2] == 'NO match\r\n':
+                channel_set_config(ser, network_config, ) #Устанавливаем нужную сеть
                 set_coordination(ser, network_config)     #Если сеть закрыта то заходим в нее как координатор    
-                # elif network_config[2] == 'MATCH\r\n':
-                #     set_join(ser, network_config)
-                # else:
-                #     pass
-                while True:
-                    if finding_device(ser, network_config):
-                        drop_device(ser, network_config, target_network)
-                    else:
-                        break
+                
+                finding_device(ser, network_config, EUI_DEVICE_TUPLE)
 
         channel_set_config(ser, target_network) #Устанавливаем целевую сеть
         set_coordination(ser, target_network)     #Если сеть закрыта то заходим в нее как координатор    
-        STOP_STEP = finding_device(ser, target_network)
-    return STOP_STEP
+        finding_device(ser, target_network, EUI_DEVICE_TUPLE)
 
 
 'SCAN: nwk found ch 26, panID 0x313D, xpan: 416E746F6E466174, lqi 255: NO match'
@@ -65,7 +55,7 @@ def network_scanning(ser):
         send = ser.readline()
         print('RX:    ', send)
         if send.decode()[19:21].isdigit():
-            CH_PAN_ID.append((send.decode()[19:21], send.decode()[29:35], send.decode()[70:]))
+            CH_PAN_ID.append((send.decode()[19:21], send.decode()[29:35]))
     
     return set(CH_PAN_ID) #(('11', '0x0204'),) 
 
@@ -73,7 +63,7 @@ def network_scanning(ser):
 
 def channel_set_config(ser, net_conf):  #Устанавливаем нужную сеть
 
-    channel, pan, match_status = net_conf
+    channel, pan, = net_conf
 
     channel_set = b'set_channel '+channel.encode()+b'\r'#Команда на подключение к каналу
     pan_id = b'set_pan_id '+pan.encode()+b'\r'#Команда на подключение к PAN ID
@@ -95,8 +85,6 @@ def channel_set_config(ser, net_conf):  #Устанавливаем нужную
         while send not in (b'Network init status 93\r\n' , b'Network init status 00\r\n'):
             send = ser.readline()
             print('RX:    ',send)
-            if send == b'':
-                break
 
         
         print('\n\t\033[31mУстанавливаем PAN ID: '+pan+'\033[0m\n')
@@ -163,42 +151,45 @@ def set_join(ser, net_conf):
         if send == b'True':
             break
 
+        # print('\n\t\033[31mПроверка статуса роутера \033[0m\n')
+        # ser.write(status)
+        # print('TX:    ',status)
+        # send = b''
+        # while True:
+        #     send = ser.readline()
+        #     print('RX:    ',send)
+        #     if send == b'':
+        #         break
 
-def finding_device(ser, net_conf):
+def finding_device(ser, net_conf, EUI_DEVICE_TUPLE):
 
-    channel, pan, match_status = net_conf
-    discover = b'discover_node "'+EUI_dev.encode()+b'"\r'
-    print('\n\t\033[33mПроверяем наличие требуемого устройства в сети channel is '+channel+', Pan ID set to '+pan+'\033[0m\n')
-    print('TX:    ',discover)
-    ser.write(discover)
-    FIND_DEVICE = False
-    while True:
-        send = ser.readline()
-        print('RX:    ',send)
-        if send.decode().find(EUI_dev) != -1:
-            print('\n\n\n\t\033[32mУстройство находится в сети channel is '+channel+', Pan ID set to '+pan + '\033[0m\n')
-            FIND_DEVICE = True
-        if send == b'QQ query end QQ\r\n' or send == b'':
-            if not FIND_DEVICE:
-                print('\n\t\033[33mТребуемое устройство не найдено, переходим к следующей сети \033[0m\n')
-            break
+    for EUI_dev in EUI_DEVICE_TUPLE:
+        channel, pan, = net_conf
+        discover = b'discover_node "'+EUI_dev.encode()+b'"\r'
+        print('\n\t\033[33mПроверяем наличие требуемого устройства '+EUI_dev+' в сети channel is '+channel+', Pan ID set to '+pan+'\033[0m\n')
+        print('TX:    ',discover)
+        ser.write(discover)
+        FIND_DEVICE = False
+        while True:
+            send = ser.readline()
+            print('RX:    ',send)
+            if send.decode().find(EUI_dev) != -1:
+                print('\n\n\n\t\033[32mУстройство находится в сети channel is '+channel+', Pan ID set to '+pan + '\033[0m\n')
+                FIND_DEVICE = True
+            if send == b'QQ query end QQ\r\n' or send == b'':
+                if not FIND_DEVICE:
+                    print('\n\t\033[33mТребуемое устройство не найдено, переходим к следующему \033[0m\n')
+                break
+        if FIND_DEVICE:
+            drop_device(ser, net_conf, EUI_dev)
 
-    return FIND_DEVICE
 
+def drop_device(ser, net_conf, EUI_dev):
 
-def drop_device(ser, net_conf, tar_net):
-
-    channel, pan, match_status = net_conf
+    channel, pan, = net_conf
+    
     drop = b'drop_target "'+EUI_dev.encode()+b'"\r'
-    close_net = b'join 0x00\r'
-
-    print(f'\n\t\033[31mЗапрос на закрытие сети сети \033[0m\n')
-    ser.write(close_net)
-    print('TX:    ',close_net)
-    send = ser.readline()
-    print('RX:    ',send)
-
-#    drop_all = b'drop_all\r'
+    drop_all = b'drop_all\r'
     print(f'\n\t\033[31mЗапрос на удаление устройства из сети channel is '+channel+', Pan ID set to '+pan+'\033[0m\n')
     ser.write(drop)
     print('TX:    ',drop)
@@ -221,8 +212,6 @@ def drop_device(ser, net_conf, tar_net):
 if __name__ == '__main__':
     
     os.system('color')
-    FIND = False
-    while not FIND:
-        FIND = scaning_zigbee()
+    scaning_zigbee(EUI_DEVICE_TUPLE)
 
 

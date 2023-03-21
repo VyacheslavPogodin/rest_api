@@ -29,15 +29,15 @@ def get_eui_dev_from_xlsx():
 
 ip = ['10.10.29.126']#, '10.10.28.70', '10.10.29.106', '10.10.28.47', '10.10.30.202', '10.10.28.62']
 
-def create_connection(db_name, db_user, db_password, db_host, db_port):
+def create_connection():
     connection = None
     try:
         connection = psycopg2.connect(
-            database=db_name,
-            user=db_user,
-            password=db_password,
-            host=db_host,
-            port=db_port,
+            database="uspd",
+            user="admin",
+            password="kPZa83Uz2#0",
+            host="localhost",
+            port="5432",
         )
         print("Connection to PostgreSQL DB successful")
     except OperationalError as e:
@@ -45,16 +45,21 @@ def create_connection(db_name, db_user, db_password, db_host, db_port):
     return connection
 
 
-def cur_execute():
+def cur_execute(create_connection):
     
     LIST_DEV = get_eui_dev_from_xlsx()
 
-    connection = create_connection(
-    "uspd", "admin", "kPZa83Uz2#0", "10.10.29.126", "5432")
+    cur = create_connection.cursor()
+    
+    cur.execute("DELETE FROM tasks")
+    cur.execute("DELETE FROM electricity_quality")
+    cur.execute("DELETE FROM meter_relay")
+    cur.execute("DELETE FROM results")
+    cur.execute("DELETE FROM outcoming_packets ")
+    cur.execute("DELETE FROM meter_device WHERE eui != '0F255C16006F0D00' ")
+    create_connection.commit()
 
-    connection.set_client_encoding('UTF8')
 
-    cur = connection.cursor()
 
     postgres_insert_query = """ INSERT INTO meter_device ( id_model, serial, eui, id_interface, in_time, archive, included_in_survey, tariff_mask, integral, current_transformation_ratio, voltage_transformation_ratio, loss_ratio, added, name, channel_mask, port_zigbee )
                                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) """
