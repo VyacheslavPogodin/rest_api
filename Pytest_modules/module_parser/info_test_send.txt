@@ -1,0 +1,4 @@
+Перед выполнением тестов необходимо остановить модули выполнив команду systemctl stop uspd-routing
+И запустить только модуль module_myrmidon_parser
+cd /home/root/USPD/module_myrmidon_parser
+/usr/bin/java -Djava.library.path="/home/root/USPD/module_myrmidon_parser/lib/" -cp .:/home/root/USPD/module_myrmidon_parser/lib/module_myrmidon_parser-0.9.25.jar:/home/root/USPD/module_myrmidon_parser/lib/log4j-1.2.17.jar:/home/root/USPD/module_myrmidon_parser/lib/postgresql-9.0-801.jdbc4.jar:/home/root/USPD/module_myrmidon_parser/lib/commons-codec-1.12.jar:/home/root/USPD/module_myrmidon_parser/lib/antlr-2.7.7.jar ru.tpp.myrmidon.ModuleMyrmidonParser

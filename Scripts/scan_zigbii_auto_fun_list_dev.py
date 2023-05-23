@@ -15,11 +15,11 @@ join_network = b'join 0xFF\r'
 role = b'get_id\r'
 
 
-target_network = ('11', '0x9417', '') #Параметры целевой сети
-EUI_DEVICE_TUPLE = ('3211FC16006F0D00', '0F255C16006F0D00', '0FA0F8FEFF8D79E0', '709EF8FEFF8D79E0', '21841F16006F0D00', '9B04A514006F0D00',  'EC64A7FEFF8D79E0', 'EEA06A16006F0D00', 'E7B99600006F0D00')
+target_network = ('11', '0x9417') #Параметры целевой сети
+EUI_DEVICE_TUPLE = ('0F255C16006F0D00',)#'0F255C16006F0D00', '0FA0F8FEFF8D79E0', '709EF8FEFF8D79E0', '21841F16006F0D00', '9B04A514006F0D00',  'EC64A7FEFF8D79E0', 'EEA06A16006F0D00', 'E7B99600006F0D00')
 #ramina 'FA20EC03006F0D00' , 4982B30B006F0D00 , 81C4B716006F0D00, 21841F16006F0D00, 5A645D16006F0D00, 0F255C16006F0D00
 
-comport = 'COM9'
+comport = 'COM8'
 
 
 
@@ -63,7 +63,8 @@ def network_scanning(ser):
 
 def channel_set_config(ser, net_conf):  #Устанавливаем нужную сеть
 
-    channel, pan, = net_conf
+    # print(net_conf)
+    channel, pan = net_conf
 
     channel_set = b'set_channel '+channel.encode()+b'\r'#Команда на подключение к каналу
     pan_id = b'set_pan_id '+pan.encode()+b'\r'#Команда на подключение к PAN ID
@@ -125,7 +126,7 @@ def set_coordination(ser, network_config):
         while True:
             send = ser.readline()
             print('RX:    ',send)
-            if send == b'Form network: 00\r\n':
+            if send in (b'Formed\r\n', b'Form network: 00\r\n'):
                 set_status_90 = True
                 break
             elif send in ( b'', b'Stack status 91\r\n', b'Scan error 3D\r\n', b'Error: send broadcast 0xA1\r\n'):
@@ -212,6 +213,7 @@ def drop_device(ser, net_conf, EUI_dev):
 if __name__ == '__main__':
     
     os.system('color')
-    scaning_zigbee(EUI_DEVICE_TUPLE)
+    while True:
+        scaning_zigbee(EUI_DEVICE_TUPLE)
 
 
