@@ -15,8 +15,9 @@ join_network = b'join 0xFF\r'
 role = b'get_id\r'
 
 
-target_network = ('11', '0x9417') #Параметры целевой сети
-EUI_DEVICE_TUPLE = ('0F255C16006F0D00',)#'0F255C16006F0D00', '0FA0F8FEFF8D79E0', '709EF8FEFF8D79E0', '21841F16006F0D00', '9B04A514006F0D00',  'EC64A7FEFF8D79E0', 'EEA06A16006F0D00', 'E7B99600006F0D00')
+target_network = ('11', '0x1111') #Параметры целевой сети
+EUI_DEVICE_TUPLE = ('6AFC9617006F0D00',)# C4F01016006F0D00,  81C4B716006F0D00, 4982B30B006F0D00, D81B21FEFF693494, A76E62FEFF8D79E0, 6B2C6B16006F0D00, 
+# 6AFC9617006F0D00, 70831703006F0D00, 67CD1B16006F0D00'0F255C16006F0D00', '0FA0F8FEFF8D79E0', '709EF8FEFF8D79E0', '21841F16006F0D00', '9B04A514006F0D00',  'EC64A7FEFF8D79E0', 'EEA06A16006F0D00', 'E7B99600006F0D00')
 #ramina 'FA20EC03006F0D00' , 4982B30B006F0D00 , 81C4B716006F0D00, 21841F16006F0D00, 5A645D16006F0D00, 0F255C16006F0D00
 
 comport = 'COM8'
@@ -166,7 +167,7 @@ def finding_device(ser, net_conf, EUI_DEVICE_TUPLE):
 
     for EUI_dev in EUI_DEVICE_TUPLE:
         channel, pan, = net_conf
-        discover = b'discover_node "'+EUI_dev.encode()+b'"\r'
+        discover = b'discover2_node "'+EUI_dev.encode()+b'"\r'
         print('\n\t\033[33mПроверяем наличие требуемого устройства '+EUI_dev+' в сети channel is '+channel+', Pan ID set to '+pan+'\033[0m\n')
         print('TX:    ',discover)
         ser.write(discover)
